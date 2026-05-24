@@ -36,3 +36,4 @@ const NotFound = () => {
 
 export default NotFound;
 // 404
+// 404
