@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Live Site](https://img.shields.io/badge/🌐%20Live%20Site-PawsHome-f97316?style=for-the-badge)](https://pawshome.vercel.app)
+[![Live Site](https://img.shields.io/badge/🌐%20Live%20Site-PawsHome-f97316?style=for-the-badge)](https://assignment-category-cat-10-pet-adop.vercel.app/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
@@ -23,7 +23,7 @@ This project reflects a real-world pet adoption portal built with the **MERN Sta
 
 ## 🌐 Live URL
 
-> ### 🔗 [https://pawshome.vercel.app](https://pawshome.vercel.app)
+> ### 🔗 [https://assignment-category-cat-10-pet-adop.vercel.app/)
 
 ---
 
