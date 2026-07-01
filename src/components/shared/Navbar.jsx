@@ -24,10 +24,12 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
+      setDropdownOpen(false);
       await logout();
       toast.success("Logged out successfully!");
-      navigate("/");
-    } catch {
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Logout failed:", error);
       toast.error("Logout failed");
     }
   };

@@ -28,8 +28,19 @@ export const AuthProvider = ({ children }) => {
   const googleLogin = () => signInWithPopup(auth, googleProvider);
 
   const logout = async () => {
-    await axiosInstance.post("/auth/logout");
-    return signOut(auth);
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Firebase sign-out failed:", error);
+    }
+
+    try {
+      await axiosInstance.post("/auth/logout");
+    } catch (error) {
+      console.error("Backend logout failed:", error);
+    }
+
+    setUser(null);
   };
 
   useEffect(() => {
