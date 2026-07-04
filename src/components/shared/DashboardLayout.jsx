@@ -10,6 +10,7 @@ import {
   FiMenu,
   FiX,
   FiHome,
+  FiUsers,
 } from "react-icons/fi";
 
 const sidebarLinks = [
