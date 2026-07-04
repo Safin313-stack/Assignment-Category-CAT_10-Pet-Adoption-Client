@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import axiosInstance from "../../utils/axios";
 import LoadingSpinner from "../../components/shared/LoadingSpinner";
+import ConfirmDialog from "../../components/shared/ConfirmDialog";
 import toast from "react-hot-toast";
 import {
   FiEdit2,
@@ -164,19 +165,28 @@ const MyListings = () => {
     },
   });
 
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
   const deleteMutation = useMutation({
     mutationFn: (id) => axiosInstance.delete(`/pets/${id}`),
+    onMutate: () => setDeleteLoading(true),
     onSuccess: () => {
       toast.success("Pet listing deleted");
       queryClient.invalidateQueries(["myListings"]);
     },
-    onError: () => toast.error("Failed to delete listing"),
+    onSettled: () => {
+      setDeleteLoading(false);
+      setDeleteTarget(null);
+    },
+    onError: () => {
+      toast.error("Failed to delete listing");
+      setDeleteLoading(false);
+    },
   });
 
-  const handleDelete = (id, name) => {
-    if (confirm(`Delete listing for "${name}"? This cannot be undone.`)) {
-      deleteMutation.mutate(id);
-    }
+  const handleDelete = (pet) => {
+    setDeleteTarget(pet);
   };
 
   if (isLoading) return <LoadingSpinner />;
@@ -289,7 +299,15 @@ const MyListings = () => {
           ))}
         </div>
       )}
-
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Delete Pet Listing"
+        message={`Delete listing for "${deleteTarget?.name}"? This cannot be undone.`}
+        confirmText="Delete"
+        onConfirm={() => deleteMutation.mutate(deleteTarget._id)}
+        onCancel={() => setDeleteTarget(null)}
+        loading={deleteLoading}
+      />
       {/* Requests Modal */}
       <AnimatePresence>
         {selectedPet && (

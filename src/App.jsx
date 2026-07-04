@@ -11,6 +11,7 @@ import Login from "./pages/main/Login";
 import Register from "./pages/main/Register";
 import NotFound from "./pages/main/NotFound";
 import MyRequests from "./pages/main/MyRequests";
+import Profile from "./pages/main/Profile";
 
 // Dashboard pages
 import AddPet from "./pages/dashboard/AddPet";
@@ -37,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <MyRequests />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
             </PrivateRoute>
           }
         />

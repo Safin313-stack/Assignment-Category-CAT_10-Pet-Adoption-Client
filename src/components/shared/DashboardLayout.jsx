@@ -15,6 +15,7 @@ import {
 const sidebarLinks = [
   { to: "/dashboard/add-pet", icon: <FiPlusCircle size={18} />, label: "Add Pet" },
   { to: "/dashboard/my-listings", icon: <FiList size={18} />, label: "My Listings" },
+  { to: "/my-requests", icon: <FiUsers size={18} />, label: "My Requests" },
 ];
 
 const Sidebar = ({ onClose }) => (

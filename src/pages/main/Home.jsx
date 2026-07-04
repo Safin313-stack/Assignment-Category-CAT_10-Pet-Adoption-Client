@@ -74,11 +74,10 @@ const Home = () => {
                 custom={1}
                 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-gray-800 dark:text-gray-100 leading-tight mb-6"
               >
-                Find Your{" "}
+                Get your tasks done
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-amber-500">
-                  Perfect
-                </span>{" "}
-                Furry Friend
+                  , Adopt Now
+                </span>
               </motion.h1>
 
               <motion.p
@@ -308,6 +307,53 @@ const Home = () => {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="section-title mb-3">How It Works 🧭</h2>
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+            Find, request, and adopt a pet in a few simple steps.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              title: "Search Pets",
+              desc: "Browse pets by species, breed, and location until you find your match.",
+            },
+            {
+              title: "Send Request",
+              desc: "Fill a quick adoption request with pickup date and a personal message.",
+            },
+            {
+              title: "Welcome Home",
+              desc: "Once approved, bring your new friend home and start a loving journey.",
+            },
+          ].map((item) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="card p-8"
+            >
+              <h3 className="font-display font-bold text-xl text-gray-800 dark:text-gray-100 mb-3">
+                {item.title}
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Success Stories */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -381,8 +427,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Pet Care Tips */}
-      <section className="py-20 bg-gray-900 dark:bg-gray-950 text-white">
+      {/* Success Stories */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
