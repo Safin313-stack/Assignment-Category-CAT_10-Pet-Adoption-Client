@@ -11,7 +11,8 @@ import "./index.css";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: 3,
+      retryDelay: 3000,
       staleTime: 5 * 60 * 1000,
     },
   },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import axiosInstance from "../../utils/axios";
@@ -30,7 +30,21 @@ const AllPets = () => {
       const res = await axiosInstance.get(`/pets?${params}`);
       return res.data;
     },
+    retry: 3,
+    retryDelay: 3000,
   });
+
+  const [showStartupMessage, setShowStartupMessage] = useState(false);
+
+  useEffect(() => {
+    let t;
+    if (isLoading) {
+      t = setTimeout(() => setShowStartupMessage(true), 5000);
+    } else {
+      setShowStartupMessage(false);
+    }
+    return () => clearTimeout(t);
+  }, [isLoading]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -135,7 +149,14 @@ const AllPets = () => {
 
         {/* Pet Grid */}
         {isLoading ? (
-          <LoadingSpinner />
+          <>
+            <LoadingSpinner />
+            {showStartupMessage && (
+              <div className="text-center text-sm text-gray-600 dark:text-gray-300 mt-3">
+                Server is starting up, please wait...
+              </div>
+            )}
+          </>
         ) : pets.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}

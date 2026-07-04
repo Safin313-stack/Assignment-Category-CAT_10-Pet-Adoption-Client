@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import axiosInstance from "../../utils/axios";
 import PetCard from "../../components/pets/PetCard";
 import LoadingSpinner from "../../components/shared/LoadingSpinner";
@@ -28,7 +29,21 @@ const Home = () => {
       const res = await axiosInstance.get("/pets/featured");
       return res.data;
     },
+    retry: 3,
+    retryDelay: 3000,
   });
+
+  const [showStartupMessage, setShowStartupMessage] = useState(false);
+
+  useEffect(() => {
+    let t;
+    if (isLoading) {
+      t = setTimeout(() => setShowStartupMessage(true), 5000);
+    } else {
+      setShowStartupMessage(false);
+    }
+    return () => clearTimeout(t);
+  }, [isLoading]);
 
   return (
     <div>
@@ -203,7 +218,14 @@ const Home = () => {
         </motion.div>
 
         {isLoading ? (
-          <LoadingSpinner />
+          <>
+            <LoadingSpinner />
+            {showStartupMessage && (
+              <div className="text-center text-sm text-gray-600 dark:text-gray-300 mt-3">
+                Server is starting up, please wait...
+              </div>
+            )}
+          </>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredPets.map((pet, i) => (
